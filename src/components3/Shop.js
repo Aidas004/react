@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Shop = ({products}) => {
+const Shop = ({products, onClick, onClick1}) => {
     return (
         <div>
             <div className="home">
@@ -8,13 +8,13 @@ const Shop = ({products}) => {
                     <img src={products[0].image} alt="#"/>
                     <h3>{products[0].title}</h3>
                     <p>{products[0].price}</p>
-                    <button>Add To Cart</button>
+                    <button onClick={onClick}>Add To Cart</button>
                 </div>
                 <div className="productCard">
                     <img src={products[1].image} alt="#"/>
                     <h3>{products[1].title}</h3>
                     <p>{products[1].price}</p>
-                    <button>Add To Cart</button>
+                    <button  onClick={onClick1}>Add To Cart</button>
                 </div>
                 <div className="productCard">
                     <img src={products[2].image} alt="#"/>

@@ -2,7 +2,7 @@ import './App3.css'
 import Home from "./components3/Home";
 import Shop from "./components3/Shop";
 import Cart from "./components3/Cart";
-import {useState} from "react";
+import React, {useState} from "react";
 
 function App3 () {
 
@@ -35,15 +35,31 @@ function App3 () {
     ]
 
     const [window, setWindow] = useState(0)
+    let [card, setCard] = useState("")
     let showWindow;
+    function onClick () {
+        setCard(<div className="productCard">
+            <img src={products[0].image} alt="#"/>
+            <h3>{products[0].title}</h3>
+            <p>{products[0].price}</p>
+        </div>)
+    }
+    function onClick1 () {
+        setCard(<div className="productCard">
+            <img src={products[1].image} alt="#"/>
+            <h3>{products[1].title}</h3>
+            <p>{products[1].price}</p>
+        </div>)
+    }
+
     if (window === 0) {
         showWindow = <Home />
     }
     if (window === 1) {
-        showWindow = <Shop products={products}/>
+        showWindow = <Shop onClick={onClick} onClick1={onClick1} products={products}/>
     }
     if (window === 2) {
-        showWindow = <Cart />
+        showWindow = <Cart card={card}/>
     }
     return (
         <div className="App">
