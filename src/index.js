@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App3 from "./App3";
+// import CreatePost from "./CreatePost";
+// import App from "./App";
+// import FakeApi from "./FakeApi";
+import App2 from "./App2";
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App3/>
+    <App2/>
   </React.StrictMode>,
   document.getElementById('root')
 );

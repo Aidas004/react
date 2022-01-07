@@ -1,32 +1,65 @@
 import './App.css'
-import Menu from "./components/menu";
-import Game from "./components/game";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import { BrowserRouter as Router, Routes,  Route } from "react-router-dom";
+import AllPosts from "./pages/ContactsPage";
+import User from "./pages/HomePage";
 
 
-const products = [
-
-    ]
 function App () {
-    const [getColor, setColor] = useState("")
-    const [getText, setText] = useState("")
-
-
-    function change(color, text) {
-        setColor(color)
-        setText(text)
+    const [getPosts, setPosts] =useState([])
+    function fetchPosts () {
+        fetch('http://167.99.138.67:1111/getallposts')
+            .then((res) => res.json())
+            .then(json => {
+                setPosts(...getPosts, json.data)
+            })
     }
+
+
+
+    // const [getName, setName] = useState('')
+    const [getNamePost, setNamePost] =useState([])
+
+    function fetchByName (name) {
+        fetch(`http://167.99.138.67:1111/getuserposts/${name}`)
+            .then((res) => res.json())
+            .then(json => {
+                setNamePost(...getNamePost, json.data)
+                console.log(json)
+                console.log(getNamePost)
+            })
+    }
+
+    // function set () {
+    //     fetch(`http://167.99.138.67:1111/getuserposts/${getName}`)
+    //         .then((res) => res.json())
+    //         .then(json => {
+    //             setNamePost(...getNamePost, json.data)
+    //             console.log(json)
+    //             console.log(getNamePost)
+    //         })
+    // }
+
+
+
 
 
     return (
         <div className="App">
-            <div className="menuDiv">
-                <Menu text={getText} color={getColor}/>
-            </div>
-            <div className="gameDiv">
-                <Game clicked={change} text="my cat is black" color="red"/>
-                <Game clicked={change} text="i have dog" color="lightgreen"/>
-                <Game clicked={change} text="i like trains" color="lightblue"/>
+            <div className="container">
+                <Router>
+                    <Routes>
+                        <Route path='/' element={<AllPosts fetchByName={fetchByName} getPosts={getPosts}/>}/>
+                        <Route path='/users/:userName' element={<User getNamePost={getNamePost}/>}/>
+
+
+
+
+
+
+
+                    </Routes>
+                </Router>
             </div>
         </div>
     )
